@@ -1,36 +1,349 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neighbourhood Safety Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <div class="container">
-        <p>Welcome Viewrs!</p>
 
+  <!-- LOADER SCREEN -->
+  <div class="nst-loader-page">
+    <svg id="nst-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path d="M415.44 512h-95.11L212.12 357.46v91.1L125.69 512H28V29.82L68.47 0h108.05l123.74 176.13V63.45L386.69 0h97.69v461.5zM38.77 35.27V496l72-52.88V194l215.5 307.64h84.79l52.35-38.17h-78.27L69 13zm82.54 466.61l80-58.78v-101l-79.76-114.4v220.94L49 501.89h72.34zM80.63 10.77l310.6 442.57h82.37V10.77h-79.75v317.56L170.91 10.77zM311 191.65l72 102.81V15.93l-72 53v122.72z"/>
+    </svg>
+    <div class="nst-name-container">
+      <div class="nst-logo-name">NST</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT (HIDDEN INITIALLY) -->
+  <div class="content" id="content">
+    <!-- SVG CLOUDS BACKGROUND -->
+    <div class="clouds-svg">
+      <svg viewBox="0 0 800 200" preserveAspectRatio="xMinYMin meet">
+        <g class="cloud-group">
+          <circle cx="100" cy="60" r="30" fill="#fff" />
+          <circle cx="140" cy="60" r="40" fill="#fff" />
+          <circle cx="180" cy="60" r="30" fill="#fff" />
+        </g>
+        <g class="cloud-group">
+          <circle cx="300" cy="100" r="20" fill="#fff" />
+          <circle cx="330" cy="100" r="30" fill="#fff" />
+          <circle cx="360" cy="100" r="20" fill="#fff" />
+        </g>
+        <g class="cloud-group">
+          <circle cx="550" cy="50" r="25" fill="#fff" />
+          <circle cx="580" cy="50" r="35" fill="#fff" />
+          <circle cx="620" cy="50" r="25" fill="#fff" />
+        </g>
+      </svg>
     </div>
 
-    <div class="loading-page">
-        <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <!-- HEADER -->
+    <header>
+      <div class="logo">SafetyTrack</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="track.html">Track Report</a>
+        <a href="#about-us">About</a>
+        <a href="services.html">Service</a>
+        <button id="loginBtn">Login</button>
+        <button id="signupBtn"><i class="fa-solid fa-user"></i></button>
+      </nav>
+    </header>
 
-            <path
-                d="M415.44 512h-95.11L212.12 357.46v91.1L125.69 512H28V29.82L68.47 0h108.05l123.74 176.13V63.45L386.69 0h97.69v461.5zM38.77 35.27V496l72-52.88V194l215.5 307.64h84.79l52.35-38.17h-78.27L69 13zm82.54 466.61l80-58.78v-101l-79.76-114.4v220.94L49 501.89h72.34zM80.63 10.77l310.6 442.57h82.37V10.77h-79.75v317.56L170.91 10.77zM311 191.65l72 102.81V15.93l-72 53v122.72z" />
-        </svg>
 
-
-        <div class="name-container">
-            <div class="logo-name">nullx</div>
+    <div class="container" id="profileSection">
+        <div class="profile-section">
+            <h2 class="section-title">Personal Details</h2>
+            
+            <form class="personal-details-form">
+                <!-- Basic Information -->
+                <div class="form-group required">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="gender">Gender</label>
+                    <select id="gender" class="form-control" required>
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="bloodType">Blood Type</label>
+                    <select id="bloodType" class="form-control" required>
+                        <option value="">Select Blood Type</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                
+                <!-- Contact Information -->
+                <div class="form-group required">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" id="phoneNumber" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="alternatePhone">Alternate Phone Number</label>
+                    <input type="tel" id="alternatePhone" class="form-control">
+                </div>
+                
+                <div class="form-group required">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                
+                <!-- Address Information -->
+                <div class="form-group required">
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="city">City</label>
+                    <input type="text" id="city" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="state">State/Province</label>
+                    <input type="text" id="state" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="zipCode">ZIP/Postal Code</label>
+                    <input type="text" id="zipCode" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="country">Country</label>
+                    <select id="country" class="form-control" required>
+                        <option value="">Select Country</option>
+                        <option value="US">United States</option>
+                        <option value="CA">Canada</option>
+                        <option value="UK">United Kingdom</option>
+                        <!-- Add more countries as needed -->
+                    </select>
+                </div>
+                
+                <!-- Medical Information -->
+                <div class="form-group medical-info">
+                    <label for="allergies">Allergies</label>
+                    <textarea id="allergies" class="form-control" placeholder="List any allergies you have"></textarea>
+                </div>
+                
+                <div class="form-group medical-info">
+                    <label for="medications">Current Medications</label>
+                    <textarea id="medications" class="form-control" placeholder="List any medications you're currently taking"></textarea>
+                </div>
+                
+                <div class="form-group medical-info">
+                    <label for="medicalConditions">Medical Conditions</label>
+                    <textarea id="medicalConditions" class="form-control" placeholder="List any existing medical conditions"></textarea>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Emergency Contacts Section -->
+        <div class="profile-section emergency-contacts">
+            <h2 class="section-title">Emergency Contacts</h2>
+            
+            <div class="contact-card">
+                <i class="fas fa-times delete-contact"></i>
+                
+                <div class="form-group required">
+                    <label for="emergencyName1">Full Name</label>
+                    <input type="text" id="emergencyName1" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="emergencyRelation1">Relationship</label>
+                    <input type="text" id="emergencyRelation1" class="form-control" required>
+                </div>
+                
+                <div class="form-group required">
+                    <label for="emergencyPhone1">Phone Number</label>
+                    <input type="tel" id="emergencyPhone1" class="form-control" required>
+                </div>
+            </div>
+            
+            <button class="btn btn-secondary" id="addContact">
+                <i class="fas fa-plus"></i> Add Another Contact
+            </button>
+        </div>
+        
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Profile</button>
         </div>
     </div>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
-    integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="./script.js"></script>
+    <!-- HERO SECTION -->
+    <main class="hero-section">
+      <div class="hero-text">
+        <div class="title-container">
+          <i class="fas fa-shield-alt"></i>
+          <h1>Secure & Anonymous Reporting</h1>
+        </div>
+        <h2>Inform situation </h2>
+        <h3>Secure persona</h3>
+        <p>Report local concerns confidently—our neighbourhood safety tracker uses end-to-end encryption to ensure your identity stays fully protected.</p>
+        <div class="divider"></div>
+        <a href="report.html" class="report-button">Make Anonymous Report</a>
+      </div>
+    </main>
 
+    <!-- FEATURES SECTION -->
+    <section class="features-section">
+      <div class="features-container">
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>Total Identity Protection</h3>
+            <p>Your reports are encrypted with military-grade security protocols—ensuring your identity stays anonymous while your input helps create a safer neighbourhood.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Real-Time Smart Routing</h3>
+            <p>Every report is instantly verified and directed to the right local authorities—enabling faster responses and smarter safety decisions in your area.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Secure & Anonymous Chat</h3>
+            <p>Communicate safely with law enforcement through an encrypted two-way messaging system—receive updates or ask questions without ever revealing your identity.</p>
+          </div>
+        </div>
+
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="number">100K+</div>
+            <div class="label">Reports Filed</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">100%</div>
+            <div class="label">Anonymity Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="number">24/7</div>
+            <div class="label">Support Available</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="about-us">
+      <div class="container-footer">
+        <div class="row">
+          <div class="footer-col">
+            <h4>What we do</h4>
+            <ul>
+              <li><a href="#">Features</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Security</a></li>
+              <li><a href="#">For business</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>who are we</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">about us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Brand Centre</a></li>
+              <li><a href="#">Privacy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+             <h4>emergency contact</h4>
+             <ul>
+               <li><a href="#">Ambulance</a></li>
+               <li><a href="#">fire station</a></li>
+               <li><a href="#">police</a></li>
+               <li><a href="#">SOS</a></li>
+             </ul>
+           </div>
+          <div class="footer-col">
+            <h4>Need Help?</h4>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Help Centre</a></li>
+              <li><a href="#">Download</a></li>
+              <li><a href="#">Security Advisories</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+              <a href="https://www.youtube.com/channel/UCAuerig2N-RZWJT8x75V9yw"><i class="fab fa-youtube"></i></a>
+              <a href="https://x.com/whatsapp"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/whatsapp/?hl=en"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.facebook.com/profile.php?id=100064758844406"><i class="fab fa-facebook"></i></a>
+            </div>
+          </div>
+        </div>
+       </div>
+    </footer>
+  </div>
+
+  <!-- AUTH MODAL -->
+  <div class="auth-modal" id="authModal">
+    <div class="auth-container">
+      <span class="close-modal" id="closeModal">&times;</span>
+      
+      <!-- Login Form -->
+      <div class="auth-form" id="loginForm">
+        <h2>Login</h2>
+        <form id="loginFormElement">
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+      
+      <!-- Switch Panel -->
+      <div class="auth-switch" id="switchPanel">
+        <h2>Welcome Back!</h2>
+        <p>Don't have an account yet? Create one in just a few clicks.</p>
+        <button id="showSignupBtn">Signup</button>
+      </div>
+      
+      <!-- Signup Form (Hidden Initially) -->
+      <div class="auth-form nst-hidden" id="signupForm">
+        <h2>Signup</h2>
+        <form id="signupFormElement">
+          <input type="text" placeholder="Full Name" required />
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">Signup</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <script src="script.js"></script>
+
+
+  
+</body>
 </html>

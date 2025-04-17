@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Page Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #dbeafe, #bfdbfe);
+        }
+
+        /* HEADER */
+        header {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            width: 80%;
+            margin: 20px auto 0;
+            background-color: white;
+            border-radius: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        nav a {
+            margin-left: 1rem;
+            text-decoration: none;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        nav a:hover {
+            color: #3b82f6;
+        }
+
+        /* MAIN CONTENT PLACEHOLDER */
+        .main-content {
+            flex: 1;
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #181842;
+            padding: 15px 0 10px; 
+            margin-top: auto;
+        }
+
+        .container-footer {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-col {
+            width: 25%;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #242ad3;
+            height: 2px;
+            width: 50px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #bbbbbb;
+            font-size: 15px;
+            text-decoration: none;
+            transition: 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 6px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.1);
+            margin: 5px 10px 0 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #ffffff;
+            color: #111b21;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header {
+                width: 95%;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav {
+                margin-top: 1rem;
+            }
+
+            .footer-col {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-col {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        .report-card {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(135deg, #2b2b45, #1a1a2f);
+  border-left: 6px solid #00c9ff;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 2rem auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-width: 1000px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+.report-image img {
+  width: 300px;
+  height: 100%;
+  object-fit: cover;
+  border-right: 2px solid #333;
+}
+
+.report-details {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.report-details h2 {
+  font-size: 24px;
+  color: #00c9ff;
+  margin-bottom: 10px;
+}
+
+.report-details .description {
+  font-size: 16px;
+  color: #cfd8dc;
+  margin-bottom: 20px;
+}
+
+.report-details ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  color: #f1f1f1;
+}
+
+.report-details ul li {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.status.in-progress {
+  background-color: #ffc107;
+  color: #212121;
+  color: white;
+  font-weight: bold;
+}
+
+.status.completed {
+  background-color: #4caf50;
+  color: white;
+}
+
+.report-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.report-buttons .btn {
+  padding: 10px 16px;
+  font-size: 14px;
+  background-color: #00c9ff;
+  border: none;
+  border-radius: 6px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.report-buttons .btn.track {
+  background-color: #00e1a1;
+}
+
+.report-buttons .btn:hover {
+  background-color: #00b4d8;
+}
+
+.report-buttons .btn.track:hover {
+  background-color: #00c896;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .report-card {
+    flex-direction: column;
+  }
+
+  .report-image img {
+    width: 100%;
+    height: 220px;
+    border-right: none;
+    border-bottom: 2px solid #333;
+  }
+
+  .report-details {
+    padding: 20px;
+  }
+}
+
+.status.resolved {
+  background-color: #28a745; /* Bootstrap green shade */
+  
+  padding: 4px 10px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.status.pending {
+  background-color: #a72828; /* Bootstrap green shade */
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.report-scroll-container {
+  max-height: 600px; /* adjust based on your layout */
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+
+.report-scroll-container::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.report-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.report-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.report-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">SafetyTrack</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="track.html">Track report</a>
+            <a href="#about-us">About</a>
+            <a href="#">Service</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT (YOUR CONTENT GOES HERE) -->
+    <main class="main-content">
+        <!-- Add your custom content here -->
+        <!-- <div style="max-width: 800px; margin: 0 auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2>Your Content Goes Here</h2>
+            <p>Replace this with your main content sections, forms, etc.</p>
+        </div> -->
+
+    <div class="report-scroll-container">
+        <div class="report-card">
+            <div class="report-image">
+              <img src="Screenshot 2025-04-17 at 1.38.05 PM.png" alt="Service/Report Image" />
+            </div>
+            <div class="report-details">
+              <h2>Power Outage Report</h2>
+              <p class="description">
+                Reported a major power outage due to transformer failure near central park.
+              </p>
+              <ul>
+                <li><strong>Tracking ID:</strong> #TR908234</li>
+                <li><strong>Location:</strong> Durgapur, West Bengal</li>
+                <li><strong>Status:</strong> <span class="status in-progress">In Progress</span></li>
+              </ul>
+              <div class="report-buttons">
+                <button class="btn">View More</button>
+                <button class="btn track">Track Status</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="report-card">
+            <div class="report-image">
+              <img src="Screenshot 2025-04-17 at 1.38.05 PM.png" alt="Service/Report Image" />
+            </div>
+            <div class="report-details">
+              <h2>Fire Incident in Sector 12</h2>
+              <p class="description">
+                A fire broke out in a residential building. Fire department responded quickly.
+              </p>
+              <ul>
+                <li><strong>Tracking ID:</strong> #FIR12345</li>
+                <li><strong>Location:</strong> Sector 12, Durgapur</li>
+                <li><strong>Status:</strong> <span class="status resolved">Resolved</span></li>
+              </ul>
+              <div class="report-buttons">
+                <button class="btn">View More</button>
+                <button class="btn track">Track Status</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="report-card">
+            <div class="report-image">
+              <img src="Screenshot 2025-04-17 at 1.38.05 PM.png" alt="Electrical Failure" />
+            </div>
+            <div class="report-details">
+              <h2>Power Outage in Sector 9</h2>
+              <p class="description">
+                Area experienced power failure for 4 hours. Electricity board was notified.
+              </p>
+              <ul>
+                <li><strong>Tracking ID:</strong> #ELE09876</li>
+                <li><strong>Location:</strong> Sector 9, Durgapur</li>
+                <li><strong>Status:</strong> <span class="status resolved">Resolved</span></li>
+              </ul>
+              <div class="report-buttons">
+                <button class="btn">View More</button>
+                <button class="btn track">Track Status</button>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Garbage Collection -->
+<div class="report-card">
+    <div class="report-image">
+      <img src="Screenshot 2025-04-17 at 1.38.05 PM.png" alt="Garbage Issue" />
+    </div>
+    <div class="report-details">
+      <h2>Garbage Not Collected</h2>
+      <p class="description">
+        Locality reported skipped garbage collection for 3 days.
+      </p>
+      <ul>
+        <li><strong>Tracking ID:</strong> #GB99882</li>
+        <li><strong>Location:</strong> Bidhannagar, Durgapur</li>
+        <li><strong>Status:</strong> <span class="status pending">Pending</span></li>
+      </ul>
+      <div class="report-buttons">
+        <button class="btn">View More</button>
+        <button class="btn track">Track Status</button>
+      </div>
+    </div>
+  </div>
+    </div>
+          
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="about-us">
+        <div class="container-footer">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>What we do</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">For business</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Who are we</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Brand Centre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Emergency contact</h4>
+                    <ul>
+                        <li><a href="#">Ambulance</a></li>
+                        <li><a href="#">Fire station</a></li>
+                        <li><a href="#">Police</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Basic toggle functionality if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add your custom JavaScript here
+        });
+    </script>
+</body>
+</html>

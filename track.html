@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Report | SafetyTrack</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <style>
+        /* BASE STYLES (Same as your original) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom, #dbeafe, #bfdbfe);
+        }
+
+        /* HEADER (Same as your original) */
+        header {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            width: 80%;
+            margin: 20px auto 0;
+            background-color: white;
+            border-radius: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        nav a {
+            margin-left: 1rem;
+            text-decoration: none;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        nav a:hover {
+            color: #3b82f6;
+        }
+
+        /* TRACKING PAGE SPECIFIC STYLES */
+        .tracking-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .tracking-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .tracking-header h1 {
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .tracking-header p {
+            color: #64748b;
+        }
+
+        .tracking-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tracking-input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .tracking-input:focus {
+            border-color: #3b82f6;
+            outline: none;
+        }
+
+        .tracking-btn {
+            padding: 0 25px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tracking-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .status-container {
+            display: none; /* Hidden until search */
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .status-id {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-in-progress {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-resolved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-details {
+            margin-top: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            margin-bottom: 12px;
+        }
+
+        .detail-label {
+            width: 150px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            flex: 1;
+            color: #1e293b;
+        }
+
+        .status-timeline {
+            margin-top: 30px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+            padding-left: 20px;
+            border-left: 2px solid #e2e8f0;
+        }
+
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -11px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 5px;
+        }
+
+        .timeline-text {
+            color: #1e293b;
+        }
+
+        .error-message {
+            color: #dc2626;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* FOOTER (Same as your original) */
+        .footer {
+            background: #181842;
+            padding: 15px 0 10px; 
+            margin-top: auto;
+        }
+
+        .container-footer {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-col {
+            width: 25%;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            background-color: #242ad3;
+            height: 2px;
+            width: 50px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #bbbbbb;
+            font-size: 15px;
+            text-decoration: none;
+            transition: 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: #ffffff;
+            padding-left: 6px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.1);
+            margin: 5px 10px 0 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #ffffff;
+            color: #111b21;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header {
+                width: 95%;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav {
+                margin-top: 1rem;
+            }
+
+            .tracking-container {
+                padding: 20px;
+                margin: 20px auto;
+            }
+
+            .tracking-form {
+                flex-direction: column;
+            }
+
+            .footer-col {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-col {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .detail-row {
+                flex-direction: column;
+            }
+
+            .detail-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">SafetyTrack</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="track.html">Track report</a>
+            <a href="#about-us">About</a>
+            <a href="services.html">Service</a>
+        </nav>
+    </header>
+
+    <!-- TRACKING CONTENT -->
+    <main class="main-content">
+        <div class="tracking-container">
+            <div class="tracking-header">
+                <h1>Track Your Report</h1>
+                <p>Enter your tracking ID below to check the status of your submitted report</p>
+            </div>
+
+            <div class="tracking-form">
+                <input type="text" class="tracking-input" id="trackingIdInput" placeholder="Enter your Tracking ID (e.g. TR-ABC123)" required>
+                <button class="tracking-btn" id="trackBtn">Track</button>
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                No report found with this tracking ID. Please check and try again.
+            </div>
+
+            <!-- Status will appear here after search -->
+            <div class="status-container" id="statusContainer">
+                <div class="status-header">
+                    <div class="status-id">Tracking ID: <span id="displayId">TR-ABC123</span></div>
+                    <div class="status-badge" id="statusBadge">In Progress</div>
+                </div>
+
+                <div class="status-details">
+                    <div class="detail-row">
+                        <div class="detail-label">Report Type:</div>
+                        <div class="detail-value" id="reportType">Streetlight not working</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Hazard Level:</div>
+                        <div class="detail-value" id="hazardLevel">Moderate</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Submitted On:</div>
+                        <div class="detail-value" id="submittedDate">May 15, 2023 - 10:30 AM</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Last Updated:</div>
+                        <div class="detail-value" id="updatedDate">May 16, 2023 - 02:15 PM</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Location:</div>
+                        <div class="detail-value" id="location">Latitude: 12.3456, Longitude: 78.9012 (Near Central Park)</div>
+                    </div>
+                </div>
+
+                <div class="status-timeline">
+                    <div class="timeline-title">Status Timeline</div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 16, 2023 - 02:15 PM</div>
+                        <div class="timeline-text">Assigned to field officer for inspection</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 15, 2023 - 11:45 AM</div>
+                        <div class="timeline-text">Report under review by department</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 15, 2023 - 10:30 AM</div>
+                        <div class="timeline-text">Report submitted successfully</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container-footer">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>What we do</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">For business</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Who are we</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Brand Centre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Emergency contact</h4>
+                    <ul>
+                        <li><a href="#">Ambulance</a></li>
+                        <li><a href="#">Fire station</a></li>
+                        <li><a href="#">Police</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const trackBtn = document.getElementById('trackBtn');
+            const trackingInput = document.getElementById('trackingIdInput');
+            const statusContainer = document.getElementById('statusContainer');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Sample report data (in a real app, this would come from a server/database)
+            const sampleReports = {
+                'TR-ABC123': {
+                    id: 'TR-ABC123',
+                    type: 'Streetlight not working',
+                    hazard: 'Moderate',
+                    submitted: 'May 15, 2023 - 10:30 AM',
+                    updated: 'May 16, 2023 - 02:15 PM',
+                    location: 'Latitude: 12.3456, Longitude: 78.9012 (Near Central Park)',
+                    status: 'in-progress',
+                    timeline: [
+                        {
+                            date: 'May 16, 2023 - 02:15 PM',
+                            text: 'Assigned to field officer for inspection'
+                        },
+                        {
+                            date: 'May 15, 2023 - 11:45 AM',
+                            text: 'Report under review by department'
+                        },
+                        {
+                            date: 'May 15, 2023 - 10:30 AM',
+                            text: 'Report submitted successfully'
+                        }
+                    ]
+                },
+                'TR-XYZ789': {
+                    id: 'TR-XYZ789',
+                    type: 'Garbage accumulation',
+                    hazard: 'High',
+                    submitted: 'May 10, 2023 - 09:15 AM',
+                    updated: 'May 12, 2023 - 04:30 PM',
+                    location: 'Latitude: 12.3567, Longitude: 78.9134 (Market Street)',
+                    status: 'resolved',
+                    timeline: [
+                        {
+                            date: 'May 12, 2023 - 04:30 PM',
+                            text: 'Issue resolved and area cleaned'
+                        },
+                        {
+                            date: 'May 11, 2023 - 03:00 PM',
+                            text: 'Sanitation team dispatched'
+                        },
+                        {
+                            date: 'May 10, 2023 - 02:30 PM',
+                            text: 'Report approved for action'
+                        },
+                        {
+                            date: 'May 10, 2023 - 09:15 AM',
+                            text: 'Report submitted successfully'
+                        }
+                    ]
+                }
+            };
+
+            trackBtn.addEventListener('click', function() {
+                const trackingId = trackingInput.value.trim().toUpperCase();
+                
+                if (!trackingId) {
+                    errorMessage.textContent = 'Please enter a tracking ID';
+                    errorMessage.style.display = 'block';
+                    statusContainer.style.display = 'none';
+                    return;
+                }
+
+                // Check if tracking ID exists in our sample data
+                if (sampleReports[trackingId]) {
+                    const report = sampleReports[trackingId];
+                    
+                    // Update the status container with report data
+                    document.getElementById('displayId').textContent = report.id;
+                    document.getElementById('reportType').textContent = report.type;
+                    document.getElementById('hazardLevel').textContent = report.hazard;
+                    document.getElementById('submittedDate').textContent = report.submitted;
+                    document.getElementById('updatedDate').textContent = report.updated;
+                    document.getElementById('location').textContent = report.location;
+                    
+                    // Update status badge
+                    const statusBadge = document.getElementById('statusBadge');
+                    statusBadge.textContent = report.status === 'resolved' ? 'Resolved' : 
+                                            report.status === 'in-progress' ? 'In Progress' : 'Pending';
+                    statusBadge.className = 'status-badge ' + 
+                                        (report.status === 'resolved' ? 'badge-resolved' : 
+                                         report.status === 'in-progress' ? 'badge-in-progress' : 'badge-pending');
+                    
+                    // Update timeline
+                    const timelineContainer = document.querySelector('.status-timeline');
+                    // Clear existing timeline items (except title)
+                    const timelineTitle = document.querySelector('.timeline-title');
+                    timelineContainer.innerHTML = '';
+                    timelineContainer.appendChild(timelineTitle);
+                    
+                    // Add new timeline items
+                    report.timeline.forEach(item => {
+                        const timelineItem = document.createElement('div');
+                        timelineItem.className = 'timeline-item';
+                        timelineItem.innerHTML = `
+                            <div class="timeline-date">${item.date}</div>
+                            <div class="timeline-text">${item.text}</div>
+                        `;
+                        timelineContainer.appendChild(timelineItem);
+                    });
+                    
+                    // Show status and hide error
+                    statusContainer.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                } else {
+                    // Show error if tracking ID not found
+                    errorMessage.textContent = 'No report found with this tracking ID. Please check and try again.';
+                    errorMessage.style.display = 'block';
+                    statusContainer.style.display = 'none';
+                }
+            });
+
+            // Allow pressing Enter key to trigger search
+            trackingInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    trackBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
