@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safe Chatbox</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #dbeafe, #bfdbfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .chat-container {
+      background-color: #fff;
+      width: 500px;
+      height: 650px; /* Increased container height */
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background-color: #182248;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: #f9f9f9;
+    }
+
+    .user-msg,
+    .bot-msg {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 15px;
+      font-size: 14px;
+    }
+
+    .user-msg {
+      background-color: #c4e4e5;
+      align-self: flex-end;
+    }
+
+    .bot-msg {
+      background-color: #eeeeee;
+      align-self: flex-start;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .chat-input button {
+      padding: 12px 18px;
+      border: none;
+      background-color: #182248;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .chat-input button:hover {
+      background-color: #537effe7;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Safe AI Chat</div>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
+
+    function sendMessage() {
+      const message = userInput.value.trim();
+      if (message === "") return;
+
+      const userMsg = document.createElement("div");
+      userMsg.className = "user-msg";
+      userMsg.innerText = message;
+      chatBox.appendChild(userMsg);
+
+      userInput.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      setTimeout(() => {
+        const botMsg = document.createElement("div");
+        botMsg.className = "bot-msg";
+        botMsg.innerText = getFakeResponse(message);
+        chatBox.appendChild(botMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 600);
+    }
+
+    function getFakeResponse(input) {
+      const lower = input.toLowerCase();
+
+      if (lower.includes("help") || lower.includes("emergency")) {
+        return "🚨 I’ve sent an alert to your emergency contacts! Stay calm.";
+      } else if (lower.includes("track") || lower.includes("location")) {
+        return "📍 I'm tracking your current location... stay safe!";
+      } else if (lower.includes("friend")) {
+        return "👫 Your friend's last location was near Central Park, 15 mins ago.";
+      } else if (lower.includes("unsafe") || lower.includes("scared")) {
+        return "🛡️ I'm here with you. Would you like me to activate SOS mode?";
+      } else {
+        return "🤖 I’m still learning. Try asking me about tracking, emergency, or friends!";
+      }
+    }
+  </script>
+</body>
+</html>

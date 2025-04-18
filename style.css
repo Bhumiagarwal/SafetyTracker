@@ -210,13 +210,14 @@ nav button {
   color: white;
   font-weight: 800;
   font-size: 1.125rem;
-  padding: 0.9rem 2rem;
+  padding: 0.6rem 2rem;
   border: none;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   cursor: pointer;
-  margin-top: 1rem;
+  margin-top: -1rem; /* Use a larger negative margin */
   transition: transform 0.2s, background-color 0.2s;
+  display: inline-block;
 }
 
 .report-button:hover {
@@ -227,7 +228,7 @@ nav button {
 .features-section {
   width: 100%;
   max-width: 1200px;
-  margin: -5rem auto 2rem;
+  margin: -3rem auto 2rem;
   padding: 2rem 1rem;
   position: relative;
   z-index: 2;
@@ -703,4 +704,22 @@ nav button {
 #profileSection {
   display: none;
   transition: all 0.3s ease;
+}
+
+
+.sticky-icon {
+  position: fixed;
+  bottom: 20px; /* Adjust the bottom distance */
+  right: 20px;  /* Adjust the right distance */
+  background-color: #fff; /* Optional background color */
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  cursor: pointer;
+  z-index: 9999; /* Ensure it appears on top */
+  transition: transform 0.2s ease-in-out;
+}
+
+.sticky-icon:hover {
+  transform: scale(1.1); /* Optional hover effect */
 }
