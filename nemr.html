@@ -635,6 +635,42 @@ document.getElementById('reportBtn').addEventListener('click', function () {
        
 });
     
+
+// Function to show the notification
+function showNotification() {
+  if (Notification.permission === "granted") {
+    new Notification("Issue Reported ✅", {
+      body: "Thank you for helping keep the neighborhood safe!",
+      icon: "https://cdn-icons-png.flaticon.com/512/190/190411.png"
+    });
+    console.log("Notification triggered successfully. Report issued.");
+  } else {
+    console.log("Notification permission not granted.");
+  }
+}
+
+// Event listener for the button
+document.getElementById('reportBtn').addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log("Report button clicked.");
+
+  // Check permission first
+  if (Notification.permission === "granted") {
+    showNotification(); // Show notification if already allowed
+  } else if (Notification.permission !== "denied") {
+    // Request permission only when the button is clicked
+    Notification.requestPermission().then(permission => {
+      console.log("Notification permission:", permission);
+      if (permission === "granted") {
+        showNotification(); // Show notification after permission granted
+      } else {
+        alert("Please enable notifications to receive confirmation alerts.");
+      }
+    });
+  } else {
+    alert("Notifications were blocked. Please enable them in browser settings.");
+  }
+});
     
     </script>
 </body>
