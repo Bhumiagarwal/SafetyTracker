@@ -82,13 +82,13 @@ header {
 }
 
   .alert-box.emergency {
-    background-color: #2a1a1a;
-    border: 2px solid #ff4d4f;
+    background-color: #0e102e;
+    border: 2px solid #ffffff;
     color: #ff4d4f;
   }
 
   .alert-box.emergency:hover {
-    background-color:#ff4d50b8;
+    background-color:#ff0004d2;
     color: #000000;
   }
 
@@ -96,13 +96,13 @@ header {
 
   
   .alert-box.non-emergency {
-    background-color: #2a2117;
-    border: 2px solid #ffa94d;
+    background-color:#0e102e;
+    border: 2px solid #ffffff;
     color: #ffa94d;
   }
 
   .alert-box.non-emergency:hover {
-    background-color: #ffa94dc6;
+    background-color: #ffd241d0;
     color: #000000;
   }
   
